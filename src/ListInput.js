@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import DB from './backend/DB';
+import {Form ,FormGroup, Col, FormControl} from 'react-bootstrap';
 
 class ListInput extends React.Component {
 
@@ -17,22 +18,25 @@ class ListInput extends React.Component {
             //to prevent from refreshing the form
             item.preventDefault();
             let input = item.target.value;
-            this.props.newItem(input);
             let postData = new FormData();
             postData.append('item_name',input);
             postData.append('target_function', 'createItem');
             this.db.createItem(postData);
+            this.props.newItem();
+            //clean the input field
+            item.target.value = '';
         }
     }
 
     render(){
         return(
-            <form>
-                <h3>Test ToDo Input</h3>
-                <input type="text" placeholder="work"
-                    onKeyDown={this.setItemInput}
-                />
-            </form>
+            <Form horizontal>
+                <FormGroup controlId="formHorizontalEmail">
+                    <Col sm={10}>
+                        <FormControl type="text" onKeyDown={this.setItemInput} placeholder="plz press Enter to input your work"/>
+                    </Col>
+                </FormGroup>
+            </Form>
         );
     }
 }

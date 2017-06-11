@@ -2,7 +2,10 @@
  * Created by X.Tan on 6/4/2017.
  */
 import React from 'react';
-import keyIndex from 'react-key-index';
+import {Table} from 'react-bootstrap';
+import FontAwesome from 'react-fontawesome';
+// var FontAwesome = require('react-fontawesome');
+// import keyIndex from 'react-key-index';
 
 class ListBody extends React.Component {
 
@@ -11,25 +14,39 @@ class ListBody extends React.Component {
     }
 
     indexGenerate(items){
-        let itemWithIndex = keyIndex(items, 1);
-        let output = itemWithIndex.map(
-            (item) =>
-                <tr key={item._id}><td>{item.value}</td></tr>
-        );
+        let  output = [];
+        for(let item in items){
+             output.push(
+                 <tr key={item}>
+                     <td>{items[item].created_at}</td>
+                     <td>{items[item].work}</td>
+                     <td>
+                         <a href="#"><FontAwesome name="rocket" /></a>
+                     </td>
+                     <td><a href="#"><FontAwesome name="trash-o" /></a></td>
+                 </tr>
+             );
+        }
         return output;
     }
 
     render(){
-        console.log(this.props.test);
         let items = this.indexGenerate(this.props.items);
-        // console.log(this.props.items);
         return(
-            <table>
+            <Table responsive striped bordered condensed hover>
+                <thead>
+                    <tr>
+                        <th>Created_At</th>
+                        <th>Todo</th>
+                        <th>Mark</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
                 <tbody>
                     {items}
                 </tbody>
-            </table>
-        );
+            </Table>
+    );
     }
 }
 
