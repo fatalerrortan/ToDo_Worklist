@@ -2,21 +2,26 @@
  * Created by X.Tan on 6/4/2017.
  */
 import React from 'react';
+import DB from './backend/DB';
 
 class ListInput extends React.Component {
 
     constructor(props){
         super(props);
+        this.db = new DB();
         this.setItemInput = this.setItemInput.bind(this);
     }
 
     setItemInput(item){
-
         if(item.keyCode === 13){
             //to prevent from refreshing the form
             item.preventDefault();
-            // console.log(item.target.value);
-            this.props.newItem(item.target.value);
+            let input = item.target.value;
+            this.props.newItem(input);
+            let postData = new FormData();
+            postData.append('item_name',input);
+            postData.append('target_function', 'createItem');
+            this.db.createItem(postData);
         }
     }
 
