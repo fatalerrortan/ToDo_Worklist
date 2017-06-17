@@ -21,8 +21,9 @@ class ListInput extends React.Component {
             let postData = new FormData();
             postData.append('item_name',input);
             postData.append('target_function', 'createItem');
-            this.db.createItem(postData);
+            this.db.operateItem(postData);
             this.props.newItem();
+            console.log('added to list');
             //clean the input field
             item.target.value = '';
         }
@@ -31,7 +32,7 @@ class ListInput extends React.Component {
     render(){
         return(
             <Form horizontal>
-                <FormGroup controlId="formHorizontalEmail">
+                <FormGroup controlId="formHorizontalWork">
                     <Col sm={10}>
                         <FormControl type="text" onKeyDown={this.setItemInput} placeholder="plz press Enter to input your work"/>
                     </Col>

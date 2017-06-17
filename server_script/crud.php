@@ -13,7 +13,7 @@ if(!empty($_POST['target_function'])){
             updateItem();
             break;
         case 'deleteItem':
-            deleteItem();
+            deleteItem($_POST['item_id']);
             break;
         default:
             break;
@@ -62,8 +62,14 @@ function updateItem(){
 
 }
 
-function deleteItem(){
-
+function deleteItem($item_id){
+    $connect = dbConnect();
+    $sql = "DELETE FROM todo_list
+            WHERE id=$item_id;";
+    if ($connect->query($sql) != TRUE) {
+        echo "Error: " . $sql . "<br>" . $connect->error;
+    }
+    $connect->close();
 }
 
 

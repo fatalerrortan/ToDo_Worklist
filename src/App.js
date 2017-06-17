@@ -8,7 +8,8 @@ class App extends React.Component {
 
   constructor(props){
     super(props);
-    this.addToList = this.addToList.bind(this);
+    this.addItem = this.addItem.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
     this.db = new DB();
     this.state = {
       worklist: ''
@@ -28,11 +29,19 @@ class App extends React.Component {
        });
   }
 
-  addToList() {
+  addItem(){
        this.loadItems();
    }
 
+   deleteItem(itemDomId){
+       let newWorklist = this.state.worklist.slice(itemDomId,1);
+       this.setState({
+           worklist: newWorklist
+       });
+   }
+
   render(){
+      // console.log(this.state.worklist);
     return(
         <div>
             <div className="row">
@@ -43,13 +52,14 @@ class App extends React.Component {
             <div className="row">
                 <div className="col-md-offset-2 col-md-10">
                     <ListInput
-                        newItem={this.addToList}
+                        newItem={this.addItem}
                     />
                 </div>
             </div>
             <div className="row">
                 <div className="col-md-offset-2 col-md-8">
                     <ListBody
+                        itemToDelete={this.deleteItem}
                         items={this.state.worklist}
                     />
                 </div>
