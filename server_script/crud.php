@@ -45,7 +45,7 @@ function createItem($itemName){
 function readItems(){
     $output = array();
     $connect = dbConnect();
-    $sql = "SELECT * FROM todo_list";
+    $sql = "SELECT * FROM todo_list ORDER BY created_at DESC";
     $items = $connect->query($sql);
     if ($items != TRUE) {
         echo "Error: " . $sql . "<br>" . $connect->error;

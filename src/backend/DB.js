@@ -28,8 +28,7 @@ class DB {
                 mode: 'cors',
                 body: formData
          });
-        let json = await response.json();
-        return json;
+        return await response.json();
     }
 }
 

@@ -13,25 +13,22 @@ class App extends React.Component {
     this.markItem = this.markItem.bind(this);
     this.db = new DB();
     this.state = {
-      worklist: ''
+         worklist: ''
     }
-    this.loadItems();
   }
 
-   async loadItems(){
-      let postData = new FormData();
-      postData.append('target_function', 'readItems');
-      let output = await this.db.readItems(postData).then((data)=>{
-          return data;
-      });
-       let newWorklist = output;
-       this.setState({
-           worklist: newWorklist
+   loadItems(){
+       let postData = new FormData();
+       postData.append('target_function', 'readItems');
+       this.db.readItems(postData).then((data) => {
+           this.setState({
+               worklist: data
+           });
        });
   }
 
   addItem(){
-       this.loadItems();
+        this.loadItems();
    }
 
    markItem(itemDomId, isMark){
@@ -51,8 +48,12 @@ class App extends React.Component {
        });
    }
 
+   componentDidMount(){
+       this.loadItems();
+   }
+
   render(){
-      // console.log(this.state.worklist);
+       console.log('render');
     return(
         <div>
             <div className="row">
