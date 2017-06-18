@@ -10,7 +10,7 @@ if(!empty($_POST['target_function'])){
             echo readItems();
             break;
         case 'updateItem':
-            updateItem();
+            updateItem($_POST['item_id'], $_POST['is_mark']);
             break;
         case 'deleteItem':
             deleteItem($_POST['item_id']);
@@ -58,14 +58,22 @@ function readItems(){
     $connect->close();
 }
 
-function updateItem(){
-
+function updateItem($item_id, $is_mark){
+    $connect = dbConnect();
+    if($is_mark == 'true'){$status = 'null';}else{$status = 1;}
+    $sql = "UPDATE todo_list
+            SET is_mark = $status
+            WHERE id=$item_id";
+    if ($connect->query($sql) != TRUE) {
+        echo "Error: " . $sql . "<br>" . $connect->error;
+    }
+    $connect->close();
 }
 
 function deleteItem($item_id){
     $connect = dbConnect();
     $sql = "DELETE FROM todo_list
-            WHERE id=$item_id;";
+            WHERE id=$item_id";
     if ($connect->query($sql) != TRUE) {
         echo "Error: " . $sql . "<br>" . $connect->error;
     }

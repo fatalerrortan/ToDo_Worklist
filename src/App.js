@@ -10,6 +10,7 @@ class App extends React.Component {
     super(props);
     this.addItem = this.addItem.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
+    this.markItem = this.markItem.bind(this);
     this.db = new DB();
     this.state = {
       worklist: ''
@@ -33,8 +34,18 @@ class App extends React.Component {
        this.loadItems();
    }
 
+   markItem(itemDomId, isMark){
+       let status = isMark ? null : 1;
+       let newWorklist = this.state.worklist;
+       newWorklist[itemDomId].is_mark = status;
+       this.setState({
+           worklist: newWorklist
+       });
+   }
+
    deleteItem(itemDomId){
-       let newWorklist = this.state.worklist.slice(itemDomId,1);
+       let newWorklist = this.state.worklist;
+       delete newWorklist[itemDomId];
        this.setState({
            worklist: newWorklist
        });
@@ -61,6 +72,7 @@ class App extends React.Component {
                     <ListBody
                         itemToDelete={this.deleteItem}
                         items={this.state.worklist}
+                        itemToMark={this.markItem}
                     />
                 </div>
             </div>
