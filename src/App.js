@@ -48,9 +48,9 @@ class App extends React.Component {
        });
    }
 
-   componentDidMount(){
-       this.loadItems();
-   }
+    componentDidMount(){
+        this.loadItems();
+    }
 
   render(){
        console.log('render');

@@ -11,8 +11,10 @@
 export default function register() {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
-      navigator.serviceWorker
+      // modify for own doman, adding 'tdolist'
+      // const swUrl = `${process.env.PUBLIC_URL}/todolist/service-worker.js`;
+        const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
+        navigator.serviceWorker
         .register(swUrl)
         .then(registration => {
           registration.onupdatefound = () => {

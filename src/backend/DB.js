@@ -5,7 +5,7 @@
 class DB {
 
     constructor(){
-        this.server_script_url = 'http://www.xulin-tan.com/todolist/crud.php';
+        this.server_script_url = 'https://www.xulin-tan.de/scripts/crud.php';
     }
 
     operateItem(formData){
@@ -22,13 +22,16 @@ class DB {
         });
     }
 
-    async readItems(formData){
-        let response = await fetch(this.server_script_url,{
-                method: 'POST',
-                mode: 'cors',
-                body: formData
-         });
-        return await response.json();
+    readItems(formData){
+        let items = fetch(this.server_script_url,{
+            method: 'POST',
+            mode: 'cors',
+            body: formData
+        }).then((response) => {
+                return response.json()
+            }
+        );
+        return items;
     }
 }
 

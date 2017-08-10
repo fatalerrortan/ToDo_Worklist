@@ -16,7 +16,7 @@ class ListBody extends React.Component {
         this.markItem= this.markItem.bind(this);
     }
 
-    indexGenerate(items){
+    getPreparedItems(items){
         let  output = [];
         for(let item in items){
              output.push(
@@ -61,7 +61,7 @@ class ListBody extends React.Component {
     }
 
     render(){
-        let items = this.indexGenerate(this.props.items);
+        let items = this.getPreparedItems(this.props.items);
         return(
             <Table responsive striped bordered condensed hover>
                 <thead>
