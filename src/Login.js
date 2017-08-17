@@ -14,6 +14,7 @@ class Login extends React.Component{
         props.preventDefault();
         const account = this.accout.value;
         const password = this.password.value;
+        this.props.auth();
     }
 
     render(){
