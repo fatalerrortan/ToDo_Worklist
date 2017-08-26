@@ -7,7 +7,6 @@ function userReducer(state =
   }, action) {
     switch (action.type){
         case User_Login:
-            console.log('triggered');
             return Object.assign({},state,{
                 isLoggedIn: true
             });

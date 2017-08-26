@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import App from './App';
-import {fetchWorklist} from './Redux/actions';
+import {fetchWorklist, operateItem} from './Redux/actions';
 
 const mapStateToProps = state => {
     return {
@@ -12,6 +12,16 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchList: () => {
             dispatch(fetchWorklist());
+        },
+        addItem: (item) => {
+            dispatch(operateItem('item_name', item, 'createItem'));
+        },
+        deleteItem: (itemId) => {
+            dispatch(operateItem('item_id', itemId, 'deleteItem'));
+        },
+        markItem: (itemId, isMark) => {
+            console.log(isMark);
+            dispatch(operateItem('item_id', itemId, 'updateItem', isMark));
         }
     }
 }

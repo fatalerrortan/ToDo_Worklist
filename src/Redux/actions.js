@@ -6,11 +6,36 @@ export const Request_Worklist = 'Request_Worklist';
 export const Receive_Worklist = 'Reveive_Worklist';
 const server_script_url = 'https://www.xulin-tan.de/scripts/crud.php';
 
-
 export function userLogin() {
     return {
         type: User_Login
     }
+}
+
+export function operateItem(param, value, target, isMark) {
+    return function (dispatch) {
+        let postData = new FormData();
+        postData.append(param, value);
+        postData.append('target_function', target);
+        postData.append('is_mark', isMark);
+        doServer(postData, dispatch);
+    }
+}
+
+function doServer(postData, dispatch) {
+    return fetch(server_script_url,{
+            method: 'POST',
+            mode: 'cors',
+            body: postData
+        }).then(
+            (error) => {
+                error.status !== 200 ? console.log('An error occured.', error): 'item created';
+            }
+        ).then(() => {dispatch(fetchWorklist())});
+}
+
+export function deactive(item) {
+
 }
 
 export function requestWorklist() {

@@ -4,16 +4,11 @@
 import React from 'react';
 import {Table} from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
-import DB from './backend/DB';
-// import keyIndex from 'react-key-index';
 
 class ListBody extends React.Component {
 
     constructor(props){
         super(props);
-        this.db = new DB();
-        this.deleteItem = this.deleteItem.bind(this);
-        this.markItem= this.markItem.bind(this);
     }
 
     getPreparedItems(items){
@@ -24,40 +19,20 @@ class ListBody extends React.Component {
                      <td>{items[item].created_at}</td>
                      <td>{items[item].work}</td>
                      <td>
-                         <a href="#" onClick={() => {this.markItem(item, items[item].id, items[item].is_mark)}}><FontAwesome name="rocket" /></a>
+                         <a href="#" onClick={() => {this.props.markItem(items[item].id, items[item].is_mark)}}><FontAwesome name="rocket" /></a>
                      </td>
                      {/*{you should use arrow function to avoid onlick function to be called before rendering}*/}
-                     <td><a href="#" onClick={() => {this.deleteItem(item, items[item].id)}}><FontAwesome name="trash-o" /></a></td>
+                     <td><a href="#" onClick={() => {this.props.deleteItem(items[item].id)}}><FontAwesome name="trash-o" /></a></td>
                  </tr>
              );
         }
         return output;
     }
 
-    deleteItem(dom_id, item_id){
-        let postData = new FormData();
-        postData.append('item_id',item_id);
-        postData.append('target_function', 'deleteItem');
-        this.db.operateItem(postData);
-        this.props.itemToDelete(dom_id);
-        console.log('deleted');
-    }
-
     loadMarktItem(){
         return(
             {background: '#FCEE89'}
         );
-    }
-
-    markItem(dom_id, item_id, is_mark){
-        let postData = new FormData();
-        postData.append('item_id',item_id);
-        postData.append('target_function', 'updateItem');
-        let mark = is_mark ? 'true' : 'false';
-        postData.append('is_mark', mark);
-        this.db.operateItem(postData);
-        this.props.itemToMark(dom_id, is_mark);
-        console.log('marked');
     }
 
     render(){
