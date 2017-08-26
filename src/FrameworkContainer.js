@@ -3,8 +3,9 @@ import Framework from './Framework';
 import {userLogin} from './Redux/actions';
 
 const mapStateToProps = state => {
+    // console.log(state.userReducer.isLoggedIn);
     return {
-        isLoggedIn: state.isLoggedIn
+        isLoggedIn: state.userReducer.isLoggedIn
     }
 }
 
