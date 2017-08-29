@@ -14,8 +14,9 @@ class Framework extends React.Component{
         return(
             <BrowserRouter>
                 <Switch>
-                    <Route exact path='/' render={() =>{
-                        return this.props.isLoggedIn ? (<AppContainer />) : (<Login auth={this.props.doLogin} />);
+                    <Route exact path='/:filter?' component={(props) =>{
+                        // console.log(props.match.params.filter);
+                        return this.props.isLoggedIn ? (<AppContainer filter={props.match.params.filter} />) : (<Login auth={this.props.doLogin} />);
                     }} />
                     <Route path='/config' component={Config} />
                 </Switch>

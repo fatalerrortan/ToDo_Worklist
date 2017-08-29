@@ -5,6 +5,7 @@ import thunkMiddleware from 'redux-thunk';
 // import { createLogger } from 'redux-logger';
 import FrameworkContainer from './FrameworkContainer';
 import rootReducer from './Redux/reducers';
+import {logger, crashReporter} from './Redux/middlewares';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import registerServiceWorker from './registerServiceWorker';
@@ -12,7 +13,9 @@ import './css/index.css';
 // const loggerMiddleware = createLogger();
 
 let store = createStore(rootReducer, applyMiddleware(
-    thunkMiddleware
+    thunkMiddleware,
+    logger,
+    crashReporter
 ));
 
 ReactDOM.render(

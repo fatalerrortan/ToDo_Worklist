@@ -10,7 +10,7 @@ class App extends React.Component {
   }
 
   render(){
-       // console.log(this.props.list);
+       // console.log('props from target component',this.props.match);
     return(
         <div>
             <div className="row">

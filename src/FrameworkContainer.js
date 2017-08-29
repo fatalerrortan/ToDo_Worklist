@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import Framework from './Framework';
 import {userLogin} from './Redux/actions';
 
-const mapStateToProps = state => {
-    // console.log(state.userReducer.isLoggedIn);
+const mapStateToProps = (state, ownProps) => {
+    // ownProps that is an object with every props passed to the bound component
     return {
         isLoggedIn: state.userReducer.isLoggedIn
     }

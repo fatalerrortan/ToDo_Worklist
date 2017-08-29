@@ -2,7 +2,9 @@ import { connect } from 'react-redux';
 import App from './App';
 import {fetchWorklist, operateItem} from './Redux/actions';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
+    // ownProps that is an object with every props passed to the bound component
+    console.log('own props from container',ownProps);
     return {
         list: state.listReducer.worklist
     }
