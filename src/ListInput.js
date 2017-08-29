@@ -2,14 +2,12 @@
  * Created by X.Tan on 6/4/2017.
  */
 import React from 'react';
-import DB from './backend/DB';
 import {Form ,FormGroup, Col, FormControl} from 'react-bootstrap';
 
 class ListInput extends React.Component {
 
     constructor(props){
         super(props);
-        this.db = new DB();
         this.setItemInput = this.setItemInput.bind(this);
     }
 
@@ -17,13 +15,8 @@ class ListInput extends React.Component {
         if(item.keyCode === 13){
             //to prevent from refreshing the form
             item.preventDefault();
-            let input = item.target.value;
-            let postData = new FormData();
-            postData.append('item_name',input);
-            postData.append('target_function', 'createItem');
-            this.db.operateItem(postData);
-            this.props.newItem();
-            console.log('added to list');
+            let newItem = item.target.value;
+            this.props.addItem(newItem);
             //clean the input field
             item.target.value = '';
         }

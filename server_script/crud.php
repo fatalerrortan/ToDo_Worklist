@@ -60,7 +60,7 @@ function readItems(){
 
 function updateItem($item_id, $is_mark){
     $connect = dbConnect();
-    if($is_mark == 'true'){$status = 'null';}else{$status = 1;}
+    if($is_mark == 1){$status = 'null';}else{$status = 1;}
     $sql = "UPDATE todo_list
             SET is_mark = $status
             WHERE id=$item_id";
